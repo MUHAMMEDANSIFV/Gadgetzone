@@ -1,0 +1,682 @@
+<head>
+    <meta charset="utf-8">
+    <title>DarkPan - Bootstrap 5 Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/admin/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/admin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/0bc67ca932.js" crossorigin="anonymous"></script>
+    <!-- Template Stylesheet -->
+    <link href="/admin/css/style.css" rel="stylesheet">
+
+    {{!-- data table --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+        body {
+            background-color: #eeeeee;
+            font-family: 'Open Sans', serif
+        }
+
+        .container {
+            margin-top: 50px;
+            margin-bottom: 50px
+        }
+
+        .card {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0.10rem
+        }
+
+        .card-header:first-child {
+            border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+        }
+
+        .card-header {
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0;
+            background-color: #fff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+        }
+
+        .track {
+            position: relative;
+            background-color: #ddd;
+            height: 7px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            margin-bottom: 60px;
+            margin-top: 50px
+        }
+
+        .track .step {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            width: 25%;
+            margin-top: -18px;
+            text-align: center;
+            position: relative
+        }
+
+        .track .step.active:before {
+            background: #FF5722
+        }
+
+        .track .step::before {
+            height: 7px;
+            position: absolute;
+            content: "";
+            width: 100%;
+            left: 0;
+            top: 18px
+        }
+
+        .track .step.active .icon {
+            background: #ee5435;
+            color: #fff
+        }
+
+        .track .icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            position: relative;
+            border-radius: 100%;
+            background: #ddd
+        }
+
+        .track .step.active .text {
+            font-weight: 400;
+            color: #000
+        }
+
+        .track .text {
+            display: block;
+            margin-top: 7px
+        }
+
+        .itemside {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            width: 100%
+        }
+
+        .itemside .aside {
+            position: relative;
+            -ms-flex-negative: 0;
+            flex-shrink: 0
+        }
+
+        .img-sm {
+            width: 80px;
+            height: 80px;
+            padding: 7px
+        }
+
+        ul.row,
+        ul.row-sm {
+            list-style: none;
+            padding: 0
+        }
+
+        .itemside .info {
+            padding-left: 15px;
+            padding-right: 7px
+        }
+
+        .itemside .title {
+            display: block;
+            margin-bottom: 5px;
+            color: #212529
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem
+        }
+
+        .btn-warning {
+            color: #ffffff;
+            background-color: #ee5435;
+            border-color: #ee5435;
+            border-radius: 1px
+        }
+
+        .btn-warning:hover {
+            color: #ffffff;
+            background-color: #ff2b00;
+            border-color: #ff2b00;
+            border-radius: 1px
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><img src="./img/logo.png" alt=""></h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="./images/admin.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">MUHAMMED ANSIF</h6>
+                        <span>Admin</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="/Dashbord" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-laptop me-2"></i>Catagery</a>
+                        <div class="dropdown-menu bg-transparent border-0 callapse">
+                            <a href="/Dashbord/viewcatagery" class="dropdown-item">View All Catagery</a>
+                            <a href="/Dashbord/addcatagery" class="dropdown-item">Add Catagery</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-laptop me-2"></i>Products</a>
+                        <div class="dropdown-menu bg-transparent border-0 ">
+                            <a href="/Dashbord/viewproduct" class="dropdown-item">View Product</a>
+                            <a href="/Dashbord/addproduct" class="dropdown-item">Add Product</a>
+                        </div>
+                    </div>
+                    <a href="/Dashbord/users" class="nav-item nav-link "><i class="fa-solid fa-user"></i> Users</a>
+                    <a href="/Dashbord/orders" class="nav-item nav-link active"><i class="fa-solid fa-user"></i>Orders</a>
+                    <a href="/Dashbord/coupons" class="nav-item nav-link"><i class="fa-solid fa-user"></i>Coupons</a>
+                        Orders</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+                </form>
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-envelope me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Message</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all message</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Profile updated</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">New user added</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Password changed</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="/images/admin.jpg" alt=""
+                                style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">MUHAMMED ANSIF V</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">My Profile</a>
+                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="/adminlogout" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+            <div class="container">
+
+                <div class="row d-flex justify-content-center">
+
+                    <div class="col-md-12">
+
+                        <div class="card">
+
+                            <div class="invoice p-5">
+
+                                <h5>Your order Confirmed!</h5>
+
+                                <span class="font-weight-bold d-block mt-4">Hello, {{order.userid.firstname}}
+                                    {{order.userid.lastname}}</span>
+
+                                <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+
+                                    <table class="table table-borderless">
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="py-2">
+
+                                                        <span class="d-block text-muted">Order Date</span>
+                                                        <span id="date">{{order.createdAt}}</span>
+
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="py-2">
+
+                                                        <span class="d-block text-muted">Order No</span>
+                                                        <span id="orderid">{{order._id}}</span>
+
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="py-2">
+
+                                                        <span class="d-block text-muted">Payment</span>
+                                                        <span>{{order.paymentmethod}}</span>
+                                                        <span id="status">{{order.trackingstatus}}</span>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="py-2">
+
+                                                        <span class="d-block text-muted">Shiping Address</span>
+                                                        <span>{{order.addressid.address}} {{order.addressid.locality}}
+                                                            {{order.addressid.landmark}},{{order.addressid.pincode}}</span>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+
+
+
+
+
+                                </div>
+
+
+
+
+                                <div class="product border-bottom table-responsive">
+
+                                    <table class="table table-borderless">
+
+                                        <tbody>
+                                            {{#each order.products}}
+                                            <tr>
+                                                <td width="20%">
+
+                                                    <img src="/images/productimages/{{this.items._id}}/1.jpg"
+                                                        width="90">
+
+                                                </td>
+
+                                                <td width="60%">
+                                                    <span class="font-weight-bold">{{this.items.Name}}</span>
+                                                    <div class="product-qty">
+                                                        <span class="d-block">Quantity:{{this.quantity}}</span>
+                                                        <span>Color:{{this.items.Color}}</span>
+
+                                                    </div>
+                                                </td>
+                                                <td width="20%">
+                                                    <div class="text-right">
+                                                        <span class="font-weight-bold">₹{{this.items.Price}}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+
+                                    </table>
+
+
+                                    <div class="track">
+                                        <div id="orderconfirmed" class="step"><a id="orderconfirmed-button"><span
+                                                    class="icon"> <i class="fa fa-check"></i> </span></a> <span
+                                                class="text">Order confirmed</span> </div>
+                                        <div id="pickedbycourier" class="step "><a id="pickedbycourier-button"><span
+                                                    class="icon"> <i class="fa fa-user"></i> </span></a> <span
+                                                class="text"> Picked by courier</span> </div>
+                                        <div id="ontheway" class="step"> <a id="ontheway-button"><span class="icon"> <i
+                                                        class="fa fa-truck"></i> </span></a> <span class="text"> On the
+                                                way </span> </div>
+                                        <div id="delivered" class="step"><a id="delivered-button"><span class="icon"> <i
+                                                        class="fa fa-box"></i> </span></a> <span
+                                                class="text">Delivered</span> </div>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="row d-flex justify-content-end mt-5">
+
+                                    <div class="col-md-5">
+
+                                        <table class="table table-borderless">
+
+                                            <tbody class="totals">
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="text-left">
+
+                                                            <span class="text-muted">Subtotal</span>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-right">
+                                                            <span>₹{{order.total}}</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="text-left">
+
+                                                            <span class="text-muted">Shipping Fee</span>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-right">
+                                                            <span>Free</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+
+
+                                                {{!-- <tr>
+                                                    <td>
+                                                        <div class="text-left">
+
+                                                            <span class="text-muted">Discount</span>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-right">
+                                                            <span class="text-success">$168.50</span>
+                                                        </div>
+                                                    </td>
+                                                </tr> --}}
+
+
+                                                <tr class="border-top border-bottom">
+                                                    <td>
+                                                        <div class="text-left">
+
+                                                            <span class="font-weight-bold">Subtotal</span>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-right">
+                                                            <span class="font-weight-bold">₹{{order.total}}</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+
+
+                                </div>
+                                {{!--
+
+                                <p>We will be sending shipping confirmation email when the item shipped successfully!
+                                </p>
+                                <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
+                                <span>Nike Team</span> --}}
+
+
+
+
+
+                            </div>
+
+
+                            {{!-- <div class="d-flex justify-content-between footer p-3">
+
+                                <span>Need Help? visit our <a href="#"> help center</a></span>
+                                <span>12 June, 2020</span>
+
+                            </div> --}}
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Footer Start -->
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/admin/lib/chart/chart.min.js"></script>
+    <script src="/admin/lib/easing/easing.min.js"></script>
+    <script src="/admin/lib/waypoints/waypoints.min.js"></script>
+    <script src="/admin/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/admin/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/admin/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="/admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+    <!-- Template Javascript -->
+    <script src="/admin/main.js"></script>
+
+    <script>
+
+        let orderdate = $('#date').text()
+        orderdate = orderdate.slice(0, 24)
+        $('#date').text(orderdate)
+
+        trecking()
+        function trecking() {
+            const status = $('#status').text()
+            console.log(status)
+            if (status == 'Order Confirmed') {
+                $('#orderconfirmed').addClass('active')
+                $("#pickedbycourier-button").click(() => treckingstatuschange('Picked by courier'))
+            } else if (status == 'Picked by courier') {
+                $('#orderconfirmed').addClass('active')
+                $('#pickedbycourier').addClass('active')
+                $("#ontheway-button").click(() => treckingstatuschange('On the way'))
+            } else if (status == 'On the way') {
+                $('#orderconfirmed').addClass('active')
+                $('#pickedbycourier').addClass('active')
+                $('#ontheway').addClass('active')
+                $('#delivered-button').click(()=> treckingstatuschange('Delivered'))
+            } else if (status == 'Delivered') {
+                $('#orderconfirmed').addClass('active')
+                $('#pickedbycourier').addClass('active')
+                $('#ontheway').addClass('active')
+                $('#delivered').addClass('active')
+                
+            } else if (status == 'Canceled') {
+                $('#orderconfirmed').addClass('active')
+                $('#pickedbycourier').addClass('active')
+                $('#ontheway').addClass('active')
+                $('#delivered').addClass('active')
+                $('#delivered').html('<span class="icon"> <i class="fa-regular fa-circle-xmark"></i> </span> <span class="text"> Order Canceled</span>')
+            }
+        }
+        function treckingstatuschange(changestatus) {
+           const orderid = $('#orderid').text()
+           $.ajax({
+            url:'/Dashbord/changestatus',
+            method:'post',
+            data:{
+                orderid:orderid,
+                changestatus:changestatus
+            },
+            success:(response)=>{
+                console.log(response.trackingstatus)
+                $('#status').text(response.trackingstatus)
+                trecking()
+            },
+            error:(err)=>{
+                alert(err)
+            }
+           })
+        }
+
+
+    </script>
+
+</body>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Electro</title>
+<body>
+  {{{body}}}
+  <script src="https://kit.fontawesome.com/0bc67ca932.js" crossorigin="anonymous"></script>
+  <script>
+    window.addEventListener("pageshow", function (event) {
+      var historyTraversal = event.persisted ||
+        (typeof window.performance != "undefined" &&
+          window.performance.navigation.type === 2);
+      if (historyTraversal) {
+        // Handle page restore.
+        window.location.reload();
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,589 @@
+<head>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/user/css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/user/css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/user/css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/user/css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/user/css/font-awesome.min.css">
+	<script src="https://kit.fontawesome.com/0bc67ca932.js" crossorigin="anonymous"></script>
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="/user/css/style.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+		.card-header:first-child {
+			border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+		}
+
+		.card-header {
+			padding: 0.75rem 1.25rem;
+			margin-bottom: 0;
+			background-color: #fff;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+		}
+
+		.track {
+			position: relative;
+			background-color: #ddd;
+			height: 7px;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			margin-bottom: 60px;
+			margin-top: 50px
+		}
+
+		.track .step {
+			-webkit-box-flex: 1;
+			-ms-flex-positive: 1;
+			flex-grow: 1;
+			width: 25%;
+			margin-top: -18px;
+			text-align: center;
+			position: relative
+		}
+
+		.track .step.active:before {
+			background: #FF5722
+		}
+
+		.track .step::before {
+			height: 7px;
+			position: absolute;
+			content: "";
+			width: 100%;
+			left: 0;
+			top: 18px
+		}
+
+		.track .step.active .icon {
+			background: #ee5435;
+			color: #fff
+		}
+
+		.track .icon {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			position: relative;
+			border-radius: 100%;
+			background: #ddd
+		}
+
+		.track .step.active .text {
+			font-weight: 400;
+			color: #000
+		}
+
+		.track .text {
+			display: block;
+			margin-top: 7px
+		}
+
+		.itemside {
+			position: relative;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			width: 100%
+		}
+
+		.itemside .aside {
+			position: relative;
+			-ms-flex-negative: 0;
+			flex-shrink: 0
+		}
+
+		.img-sm {
+			width: 80px;
+			height: 80px;
+			padding: 7px
+		}
+
+		.itemside .info {
+			padding-left: 15px;
+			padding-right: 7px
+		}
+
+		.itemside .title {
+			display: block;
+			margin-bottom: 5px;
+			color: #212529
+		}
+
+		.btn-warning {
+			color: #ffffff;
+			background-color: #ee5435;
+			border-color: #ee5435;
+			border-radius: 1px
+		}
+
+		.btn-warning:hover {
+			color: #ffffff;
+			background-color: #ff2b00;
+			border-color: #ff2b00;
+			border-radius: 1px
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- HEADER -->
+	<header>
+		<!-- TOP HEADER -->
+		<div id="top-header">
+			<div class="container">
+				<ul class="header-links pull-left">
+					<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+					<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+				</ul>
+				<ul class="header-links pull-right">
+					<div class="dropdown">
+						<button class="dropbtn">More</button>
+						<div class="dropdown-content">
+							<a href="#"><i class="fa-solid fa-bell"></i>NOTIFICATION PREFERENCES</a>
+							<a href="#"><i class="fa-solid fa-comments-question-check"></i>24x7 Customer Care
+								Support</a>
+							<a href="#"><i class="fa-solid fa-download"></i>Download App</a>
+						</div>
+					</div>
+
+					<div class="dropdown">
+						<a class="dropbtn"><i class="fa fa-user-o"></i> My Account</a>
+						<div class="dropdown-content">
+							<a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+							<a href="#"><i class="fa-solid fa-award"></i> Prime Membership</a>
+							<a href="#"><i class="fa-solid fa-coin-vertical"></i> Supercoin Zone</a>
+							<a href="/home/orders"><i class="fa-solid fa-cards-blank"></i>Orders</a>
+							<a href="#"><i class="fa-solid fa-gift-card"></i>Coupons</a>
+							<a href="#"><i class="fa-solid fa-gift-card"></i> Gift Cards</a>
+							<a href="#">Notifications</a>
+							<a href="/userlogout">Logout</a>
+						</div>
+					</div>
+				</ul>
+			</div>
+		</div>
+		<!-- /TOP HEADER -->
+
+		<!-- MAIN HEADER -->
+		<div id="header">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- LOGO -->
+					<div class="col-md-3">
+						<div class="header-logo">
+							<a href="#" class="logo">
+								<img src="./img/logo.png" alt="">
+							</a>
+						</div>
+					</div>
+					<!-- /LOGO -->
+
+					<!-- SEARCH BAR -->
+					<div class="col-md-6">
+						<div class="header-search">
+							<form>
+								<select class="input-select">
+									<option value="0">All Categories</option>
+									<option value="1">Category 01</option>
+									<option value="1">Category 02</option>
+								</select>
+								<input class="input" placeholder="Search here">
+								<button class="search-btn">Search</button>
+							</form>
+						</div>
+					</div>
+					<!-- /SEARCH BAR -->
+
+					<!-- ACCOUNT -->
+					<div class="col-md-3 clearfix">
+						<div class="header-ctn">
+							<!-- Wishlist -->
+							<div>
+								<a href="/home/wishlist">
+									<i class="fa fa-heart-o"></i>
+									<span>Your Wishlist</span>
+									<div class="qty">2</div>
+								</a>
+							</div>
+							<!-- /Wishlist -->
+
+							<!-- Cart -->
+							<div class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<i class="fa fa-shopping-cart"></i>
+									<span>Your Cart</span>
+									<div class="qty" id="cartcount">{{cartCount}}</div>
+								</a>
+								<div class="cart-dropdown">
+									<div class="cart-list">
+										{{#each data}}
+										<div class="product-widget">
+											<p id=""></p>
+											<div class="product-img">
+												<img src="./images/productimages/{{this.items._id}}/1.jpg" alt="">
+											</div>
+											<div class="product-body">
+												<h3 class="product-name"><a href="#">{{this.items.Name}}</a></h3>
+												<h4 class="product-price"><span id="q"
+														class="qty">{{this.quantity}}x</span>₹{{this.items.Price}}.00
+												</h4>
+											</div>
+											<button class="delete"><i class="fa fa-close"></i></button>
+										</div>
+										{{/each}}
+									</div>
+									<div class="cart-summary">
+										<small>{{cartCount}} Item(s) selected</small>
+										{{!-- <h5>SUBTOTAL: $2940.00</h5> --}}
+									</div>
+									<div class="cart-btns">
+										<a href="/home/cart">View Cart</a>
+										<a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+									</div>
+								</div>
+							</div>
+							<!-- /Cart -->
+
+							<!-- Menu Toogle -->
+							<div class="menu-toggle">
+								<a href="#">
+									<i class="fa fa-bars"></i>
+									<span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
+	</header>
+	<!-- /HEADER -->
+
+	<div class=" mt-5 mb-5">
+
+		<div class="row d-flex justify-content-center">
+
+			<div class="col-md-12">
+
+				<div class="card">
+
+
+					<div class="invoice p-5">
+
+						<h5>Your order Confirmed!</h5>
+
+						<span class="font-weight-bold d-block mt-4">Hello, {{order.userid.firstname}}
+							{{order.userid.lastname}}</span>
+						<span>You order has been confirmed and will be shipped in next two days!</span>
+
+						<div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+
+							<table class="table table-borderless">
+
+								<tbody>
+									<tr>
+										<td>
+											<div class="py-2">
+
+												<span class="d-block text-muted">Order Date</span>
+												<span id="date">{{order.createdAt}}</span>
+
+											</div>
+										</td>
+
+										<td>
+											<div class="py-2">
+
+												<span class="d-block text-muted">Order No</span>
+												<span>{{order._id}}</span>
+
+											</div>
+										</td>
+
+										<td>
+											<div class="py-2">
+
+												<span class="d-block text-muted">Payment</span>
+												<span>{{order.paymentmethod}}</span>
+												<span id="status" style="display: none;">{{order.trackingstatus}}</span>
+
+											</div>
+										</td>
+
+										<td>
+											<div class="py-2">
+
+												<span class="d-block text-muted">Shiping Address</span>
+												<span>{{order.addressid.address}} {{order.addressid.locality}}
+													{{order.addressid.landmark}},
+													{{order.addressid.pincode}},INDIA</span>
+
+											</div>
+										</td>
+									</tr>
+								</tbody>
+
+							</table>
+
+
+
+
+
+						</div>
+
+
+
+
+						<div class="product border-bottom table-responsive">
+
+							<table class="table table-borderless">
+
+								<tbody>
+									{{#each order.products}}
+									<tr>
+										<td width="20%">
+
+											<img src="/images/productimages/{{this.items._id}}/1.jpg" width="90">
+
+										</td>
+
+										<td width="60%">
+											<span class="font-weight-bold">{{this.items.Name}}</span>
+											<div class="product-qty">
+												<span class="d-block">Quantity:{{this.quantity}}</span>
+												<span>Color:{{this.items.Color}}</span>
+
+											</div>
+										</td>
+										<td width="20%">
+											<div class="text-right">
+												<span class="font-weight-bold">₹{{this.items.Price}}</span>
+											</div>
+										</td>
+									</tr>
+									{{/each}}
+
+								</tbody>
+
+							</table>
+
+
+
+						</div>
+
+
+						<div class="track">
+							<div id="orderconfirmed" class="step "> <span class="icon"> <i class="fa fa-check"></i>
+								</span> <span class="text">Order confirmed</span> </div>
+							<div id="pickedbycourier" class="step"> <span class="icon"> <i class="fa fa-user"></i>
+								</span> <span class="text"> Picked by courier</span> </div>
+							<div id="ontheway" class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span>
+								<span class="text"> On the way </span>
+							</div>
+							<div id="delivered" class="step"> <span class="icon"> <i class="fa fa-box"></i> </span>
+								<span class="text">Delivered</span>
+							</div>
+						</div>
+
+
+						<div class="row d-flex justify-content-end">
+
+							<div class="col-md-5">
+
+								<table class="table table-borderless">
+
+									<tbody class="totals">
+
+										<tr>
+											<td>
+												<div class="text-left">
+
+													<span class="text-muted">Subtotal</span>
+
+												</div>
+											</td>
+											<td>
+												<div class="text-right">
+													<span>₹{{order.total}}</span>
+												</div>
+											</td>
+										</tr>
+
+
+										<tr>
+											<td>
+												<div class="text-left">
+
+													<span class="text-muted">Shipping Fee</span>
+
+												</div>
+											</td>
+											<td>
+												<div class="text-right text-success">
+													<span>Free</span>
+												</div>
+											</td>
+										</tr>
+
+
+
+										<tr class="border-top border-bottom">
+											<td>
+												<div class="text-left">
+
+													<span class="font-weight-bold">total</span>
+
+												</div>
+											</td>
+											<td>
+												<div class="text-right">
+													<span class="font-weight-bold">₹{{order.total}}</span>
+												</div>
+											</td>
+										</tr>
+
+									</tbody>
+
+								</table>
+
+							</div>
+
+
+
+						</div>
+
+
+
+
+
+					</div>
+					<div>
+						<a onclick="history.back()" class="btn btn-warning" data-abc="true"> <i
+								class="fa fa-chevron-left"></i> Back to orders</a>
+						<a id="ordercancel" class="btn btn-warning hide" onclick="cancelorder('{{order._id}}')"
+							data-abc="true"></a>
+					</div>
+
+					<div class="d-flex justify-content-between footer p-3">
+
+						<span>Need Help? visit our <a href="#"> help center</a></span>
+						<span>12 June, 2020</span>
+
+					</div>
+
+
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<script src="/user/js/jquery.min.js"></script>
+	<script src="/user/js/bootstrap.min.js"></script>
+	<script src="/user/js/slick.min.js"></script>
+	<script src="/user/js/nouislider.min.js"></script>
+	<script src="/user/js/jquery.zoom.min.js"></script>
+	<script src="/user/js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+
+	<script>
+		$(document).ready(() => {
+			let date = $('#date').text()
+			date = date.slice(0, 24)
+			$('#date').text(date)
+		})
+		tracking()
+		function tracking() {
+			$(document).ready(() => {
+				const status = $('#status').text()
+				console.log(status)
+				if (status == 'Order Confirmed') {
+					$('#orderconfirmed').addClass('active')
+				} else if (status == 'Picked by courier') {
+					$('#orderconfirmed').addClass('active')
+					$('#pickedbycourier').addClass('active')
+				} else if (status == 'On the way') {
+					$('#orderconfirmed').addClass('active')
+					$('#pickedbycourier').addClass('active')
+					$('#ontheway').addClass('active')
+				} else if (status == 'Delivered') {
+					$('#orderconfirmed').addClass('active')
+					$('#pickedbycourier').addClass('active')
+					$('#ontheway').addClass('active')
+					$('#delivered').addClass('active')
+				} else if (status == 'Canceled') {
+					$('#orderconfirmed').addClass('active')
+					$('#pickedbycourier').addClass('active')
+					$('#ontheway').addClass('active')
+					$('#delivered').addClass('active')
+					$('#delivered').html('<span class="icon"> <i class="fa-regular fa-circle-xmark"></i> </span> <span class="text"> Order Canceled</span>')
+				}
+				if (status != "Delivered" && status != 'Canceled') {
+					$('#ordercancel').removeClass('hide')
+					$('#ordercancel').addClass('text-light')
+					$('#ordercancel').addClass('btn')
+					$('#ordercancel').addClass('btn-danger')
+					$('#ordercancel').text('Cancel Order')
+				}
+			})
+		}
+		function cancelorder(orderid) {
+			$.ajax({
+				url: '/home/order-cencel',
+				method: 'POST',
+				data: {
+					orderid: orderid,
+					status: 'Canceled'
+				},
+				success: (response) => {
+					$('#status').text('Canceled')
+					$('#ordercancel').css('display', 'none')
+					tracking()
+				},
+				error: (err) => {
+					alert(err)
+				}
+			})
+		}
+	</script>
+
+</body>
