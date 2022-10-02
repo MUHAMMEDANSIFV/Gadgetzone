@@ -6,6 +6,7 @@ const {
     ObjectID
 } = require('bson')
 const CART = require('../models/cart')
+const { NetworkContext } = require('twilio/lib/rest/supersim/v1/network')
 
 const users = mongoose.model(usersmodales.USER_COLLECTION, usersmodales.USER_SCHEMA)
 const carts = mongoose.model(CART.CART_COLLECION, CART.CART_SCHEMA)
@@ -30,7 +31,7 @@ module.exports = {
                 }
                 const order = new orders(product)
                 order.save().then(async(done)=>{
-                     const a = await coupons.findByIdAndUpdate(ObjectID(couponid),{
+                     await coupons.findByIdAndUpdate(ObjectID(couponid),{
                     $push:{
                         users:userid
                     }
@@ -41,7 +42,11 @@ module.exports = {
                     }
                     console.log(done);
                     resolve(done)
+                }).catch((err)=>{
+                    reject(err)
                 })
+            }).catch((err)=>{
+                reject(err)
             })
         })
     },
@@ -51,6 +56,8 @@ module.exports = {
             orders.findById(id).populate('addressid').populate('products.items').then((order) => {
                 console.log(order + 'order');
                 resolve(order)
+            }).catch((err)=>{
+                reject(err)
             })
         })
     },
@@ -62,6 +69,7 @@ module.exports = {
                 resolve(order)
             }).catch((error) => {
                 console.log(error + '\n a error find in view orders order helpers');
+                reject(error)
             })
         })
     },
@@ -72,6 +80,7 @@ module.exports = {
                 resolve(order)
             }).catch((error) => {
                 console.log(error + '\n This error find in order helpers find each product ');
+                reject(error)
             })
         })
     },
@@ -83,6 +92,7 @@ module.exports = {
                 resolve(data)
             }).catch((error) => {
                 console.log(error + "\n error find in order hlelpers vieworderamin");
+                reject(error)
             })
         })
     },
@@ -112,11 +122,14 @@ module.exports = {
       })
     },
     order:(orderid)=>{
-        return new Promise((resolve,reject)=>{
-            orders.findById(orderid).populate('userid').populate('addressid').populate('products.items').populate('products.items.Catagery').then((order)=>{
-                console.log(order);
-                resolve(order)
+            try {
+                return new Promise(async(resolve,reject)=>{
+             const order =await orders.findById(orderid).populate('userid').populate('addressid').populate('products.items').populate('products.items.Catagery')
+             if(order == null) reject()
+             resolve(order)
             })
-        })
+            }catch (err) {
+                reject(err)
+            }
     }
-}
+};
