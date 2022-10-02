@@ -50,7 +50,9 @@ module.exports={
                 Description:data.Description
             }).then((data)=>{
                 resolve(data)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     deleteproduct:(id)=>{
@@ -69,7 +71,9 @@ module.exports={
                    return catagery
                 })
                 resolve(products)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     }
        

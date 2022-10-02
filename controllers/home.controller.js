@@ -15,32 +15,40 @@ const {
 
 
 module.exports = {
-    home: (req, res, next) => {
-        productHelper.viewproduct().then((product) => {
-            cartHelper.findcart(req.session.userlogin).then(async (done) => {
-                const catagery = await catageryHelper.viewcatagery()
-                console.log(product)
-                const data = done.cart
-                const cartCount = done.count
-                console.log(catagery);
-                res.render('home/home', {
-                    product,
-                    data,
-                    cartCount,
-                    catagery
-                })
-            })
-        })
+    home: async(req, res, next) => {
+        try{
+           const product =await productHelper.viewproduct()
+              const done =await cartHelper.findcart(req.session.userlogin)
+                    const catagery = await catageryHelper.viewcatagery()
+                    console.log(product)
+                    const data = done.cart
+                    const cartCount = done.count
+                    console.log(catagery);
+                    res.render('home/home', {
+                        product,
+                        data,
+                        cartCount,
+                        catagery
+                    })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    product: (req, res) => {
-        productHelper.findproduct(req.params.id).then((product) => {
+    product: async(req, res, next) => {
+        try{
+            const product =await productHelper.findproduct(req.params.id)
             res.render('home/product', {
                 product
             })
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    cart: (req, res) => {
-        cartHelper.findcart(req.session.userlogin).then((done) => {
+    cart: async(req, res,next) => {
+        try{
+            const done =await cartHelper.findcart(req.session.userlogin)
             const data = done.cart
             const cartCount = done.count
             const user = req.session.userlogin
@@ -52,58 +60,83 @@ module.exports = {
                 user,
                 sum
             })
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    addtocart: (req, res) => {
-        console.log('add to cart');
-        cartHelper.addtocart(req.session.userlogin, req.params.id).then((done) => {
+    addtocart: async(req, res,next) => {
+        try{
+            const done =await cartHelper.addtocart(req.session.userlogin, req.params.id)
             if (done) {
                 res.status(200).send(done);
             } else {
                 console.log('add to cart is failed please try again');
             }
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    deletecart: (req, res) => {
-        cartHelper.deletecart(req.body).then((data) => {
+    deletecart: async(req, res,next) => {
+        try{
+            const data =await cartHelper.deletecart(req.body)
             res.json(data)
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    addtowishlist: (req, res) => {
-        wishlistHelper.addtowishlist(req.session.userlogin, req.params.id).then((done) => {
+    addtowishlist: async(req, res,next) => {
+        try{
+            const done =await wishlistHelper.addtowishlist(req.session.userlogin, req.params.id)
             if (done) {
                 res.redirect('back')
             }
-        })
+        }catch(err) {
+          console.log(err);
+          next()
+        }
     },
-    wishlist: (req, res) => {
-        wishlistHelper.viewwishlist(req.session.userlogin).then((data) => {
+    wishlist: async(req, res,next) => {
+        try{
+            const data =await wishlistHelper.viewwishlist(req.session.userlogin)
             res.render('home/wishlist', {
                 data
             })
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    deletewishlist: (req, res) => {
-        wishlistHelper.deletewishlist(req.params.id).then((done) => {
+    deletewishlist: async(req, res,next) => {
+        try{
+            await wishlistHelper.deletewishlist(req.params.id)
             res.redirect('back')
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    placeorder: (req, res) => {
-        cartHelper.findcart(req.session.userlogin).then((done) => {
-            addressHelper.viewaddress(req.session.userlogin).then((user) => {
-                const data = done.cart
-                const sum = done.sum
-                if (data == null) {
-                    res.redirect('/home/cart')
-                } else {
-                    res.render('home/checkout', {
-                        data,
-                        user,
-                        sum
-                    })
-                }
-            })
-        })
+    placeorder: async(req, res,next) => {
+        try{
+            const done =await cartHelper.findcart(req.session.userlogin)
+            const user =await addressHelper.viewaddress(req.session.userlogin)
+                 const data = done.cart
+                 const sum = done.sum
+                 if (data == null) {
+                     res.redirect('/home/cart')
+                 } else {
+                     res.render('home/checkout', {
+                         data,
+                         user,
+                         sum
+                     })
+                 }
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
     changeproductquantity: (req, res) => {
         req.body.cart = req.session.userlogin
@@ -125,114 +158,150 @@ module.exports = {
             res.json(data)
         })
     },
-    checkout: (req, res) => {
-        orderHelper.palceorder(req.params.addressid, req.session.userlogin, req.params.total, req.params.paymentmethod,req.params.couponid).then((done) => {
+    checkout: async(req, res,next) => {
+        try{
+            const done =await orderHelper.palceorder(req.params.addressid, req.session.userlogin, req.params.total, req.params.paymentmethod,req.params.couponid)
             if (req.params.paymentmethod == "COD") {
                 res.json(done)
             } else {
-                userHelper.creatrazorpay(done._id, req.params.total).then((done) => {
-                    res.json(done)
-                })
+                 const data = await userHelper.creatrazorpay(done._id, req.params.total)
+                    res.json(data)
             }
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    vieworders: (req, res) => {
-        console.log(req.session.userlogin);
-        orderHelper.vieworders(req.session.userlogin).then((data) => {
-            console.log(data);
+    vieworders: async(req, res,next) => {
+        try{
+            const data =await orderHelper.vieworders(req.session.userlogin)
             res.render('home/orders', {
                 data
             })
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    order: (req, res) => {
-        orderHelper.findeachorder(req.params.id).then((order) => {
+    order: async(req, res,next) => {
+        try{
+            const order =await orderHelper.findeachorder(req.params.id)
             res.render('home/order', {
                 order
             })
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    userprofile: (req, res) => {
-        userHelper.finduser(req.session.userlogin).then((user) => {
-            console.log(user);
-            res.render('home/userprofile', {
-                user
-            })
-        }).catch((error) => {
-            res.send(user + '\n error find userprofile page loding time ')
+    userprofile: async(req, res,next) => {
+       try{
+        const user = await userHelper.finduser(req.session.userlogin)
+        console.log(user);
+        res.render('home/userprofile', {
+            user
         })
+       }catch(err) {
+        console.log(err);
+        next()
+       }
     },
-    editaddress: (req, res) => {
-        console.log(req.body);
-        addressHelper.editaddress(req.body, req.body.addressid).then((data) => {
+    editaddress: async(req, res,next) => {
+        try{
+            const data =await addressHelper.editaddress(req.body, req.body.addressid)
             res.json(data)
-        }).catch((error) => {
-            console.log(error);
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    verifypayment: (req, res) => {
-        userHelper.verifypayment(req.session.userlogin, req.body, req.body).then((data) => {
+    verifypayment: async(req, res,next) => {
+        try{
+            const data =await userHelper.verifypayment(req.session.userlogin, req.body, req.body)
             res.json(data)
-        })
+        }catch(err) {
+            console.log(err);
+            next()
+        }
     },
-    userprofileedit: (req, res) => {
-        userHelper.userprofileedit(req.body.keyword, req.body.value, req.session.userlogin).then((data) => {
+    userprofileedit: async(req, res,err) => {
+          try{
+            await userHelper.userprofileedit(req.body.keyword, req.body.value, req.session.userlogin)
             res.json({
                 status: true
             })
-        }).catch((error) => {
-            console.log(error + '\n error find in home controllers')
-        })
-    },
-    findbycatagery: (req, res) => {
-        console.log(req.body.id);
-        productHelper.findbycatagery(req.body.id).then((product) => {
-            res.json(product)
-        })
-    },
-    ordercancel: (req, res) => {
-        orderHelper.changestatus(req.body.orderid, req.body.status).then((data) => {
-            res.json(data)
-        }).catch((error) => {
-            console.log(error);
-        })
-    },
-    passwordchecking: (req, res) => {
-        console.log(req.body)
-        userHelper.passwordchecking(req.session.userlogin, req.body.password).then((done) => {
-            res.json(done)
-        })
-    },
-    passwordchanging: (req, res) => {
-        userHelper.passwordchecking(req.session.userlogin, req.body.oldpassword).then((passwordstatus) => {
-            if (passwordstatus) {
-                userHelper.passwordchanging(req.session.userlogin, req.body).then((data) => {
-                    res.json(data)
-                }).catch((error) => {
-                    console.log(error);
-                })
-            } else res.json({
-                status: false
-            })
-        })
-    },
-    ordersuccess:(req,res) => {
-        orderHelper.findorder(req.params.orderid).then((order) => {
-            res.render('home/ordersuccess',{order})
-        })
-    },
-    viewcoupons:(req,res) => {
-      couponsHelper.viewcoupons().then((coupons) => {
-        const username = req.session.username
-        res.render('home/coupons',{coupons,username})
-      })
-    },
-    checkcoupon:(req,res) => {
-        console.log(req.body);
-        couponsHelper.checkcoupon(req.session.userlogin,req.body.code).then((coupon) => {
-             res.json(coupon)
-        }).catch((err) => {
+          }catch(err) {
             console.log(err);
+            next()
+          }
+    },
+    findbycatagery: async(req, res,next) => {
+        try{
+            const product = await productHelper.findbycatagery(req.body.id)
+            res.json(product)
+        }catch(err) {
+            console.log(err);
+            next()
+        }
+    },
+    ordercancel: async(req, res,next) => {
+       try{
+        const data =await orderHelper.changestatus(req.body.orderid, req.body.status)
+        res.json(data)
+       }catch(err) {
+        console.log(err);
+        next()
+       }
+    },
+    passwordchecking: async(req, res,next) => {
+         try{
+            const done =await userHelper.passwordchecking(req.session.userlogin, req.body.password)
+            res.json(done)
+         }catch(err) {
+            console.log(err);
+            next()
+         }
+    },
+    passwordchanging: async(req, res,next) => {
+       try{
+        const passwordstatus =await userHelper.passwordchecking(req.session.userlogin, req.body.oldpassword)
+        if (passwordstatus) {
+            const data =await userHelper.passwordchanging(req.session.userlogin, req.body)
+                res.json(data)
+        } else res.json({
+            status: false
         })
+       }catch(err) {
+        console.log(err);
+        next()
+       }
+    },
+    ordersuccess: async(req,res,next) => {
+       try{
+        const order =await orderHelper.findorder(req.params.orderid)
+            res.render('home/ordersuccess',{order})
+       }catch(err) {
+        console.log(err);
+        next()
+       }
+    },
+    viewcoupons: async(req,res,next) => {
+        try{
+            const coupons =await couponsHelper.viewcoupons()
+            const username = req.session.username
+            res.render('home/coupons',{coupons,username})
+        }catch(err) {
+            console.log(err);
+            next()
+        }
+    },
+    checkcoupon: async(req,res,next) => {
+       try{
+        const coupon = await couponsHelper.checkcoupon(req.session.userlogin,req.body.code)
+             res.json(coupon)
+       }catch(err) {
+        console.log(err);
+        next()
+       }
     }
 }

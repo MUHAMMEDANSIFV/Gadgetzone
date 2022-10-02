@@ -12,7 +12,9 @@ module.exports = {
             const coupon = new coupons(data)
             coupon.save().then((done) => {
                 resolve(done)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     viewcoupons: () => {
@@ -20,7 +22,9 @@ module.exports = {
             coupons.find({}).then((coupons) => {
                 console.log(coupons);
                 resolve(coupons)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     deletecoupon: (couponid) => {
@@ -43,7 +47,9 @@ module.exports = {
                 }
                 if (coupon == null) resolve(null)
                 else resolve(coupon)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     }
 }

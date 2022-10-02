@@ -9,7 +9,9 @@ module.exports = {
         const wishlists = new wishlist({userid:userid,productid:productid})
         wishlists.save().then((done)=>{
             resolve(done)
-        })
+        }).catch((err)=>{
+            reject(err)
+           })
         })
     },
     viewwishlist:(id)=>{

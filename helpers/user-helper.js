@@ -33,7 +33,9 @@ module.exports = {
             user1.save().then((data) => {
                 console.log(data);
                 resolve(data)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     loginuser: (data) => {
@@ -73,7 +75,9 @@ module.exports = {
                 button: true
             }).then((done) => {
                 resolve(done)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     blockuser: (id) => {
@@ -84,7 +88,9 @@ module.exports = {
                 button: false
             }).then((done) => {
                 resolve(done)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     existmobile: (mobile) => {
@@ -97,7 +103,9 @@ module.exports = {
                 } else {
                     resolve(false)
                 }
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     existemail: (email) => {
@@ -110,7 +118,9 @@ module.exports = {
                 } else {
                     resolve(false)
                 }
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     statustrue: (mobile) => {
@@ -123,7 +133,9 @@ module.exports = {
                 }
             }).then((data) => {
                 resolve(data)
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     finduser: (id) => {
@@ -134,6 +146,7 @@ module.exports = {
                 resolve(user)
             }).catch((error) => {
                 console.log(error + '\n A error find user helpers find user');
+                reject(error)
             })
         })
     },
@@ -165,6 +178,7 @@ module.exports = {
                 resolve(order)
             }).catch((err) => {
                 console.log(err);
+                reject(err)
             })
 
         })
@@ -218,7 +232,9 @@ module.exports = {
                 resolve({
                     status: false
                 })
-            })
+            }).catch((err)=>{
+                reject(err)
+               })
         })
     },
     passwordchanging: (userid, data) => {
@@ -233,6 +249,7 @@ module.exports = {
                 resolve(done)
             }).catch((error) => {
                 console.log(error);
+                reject(error)
             })
         })
     }
