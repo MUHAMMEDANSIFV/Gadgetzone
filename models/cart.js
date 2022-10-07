@@ -9,6 +9,7 @@ module.exports={
             {items:
                 {type:mongoose.Schema.Types.ObjectId , ref:'product'},
             quantity:Number,
+            Category:Object,
             total:Number
         }
     ]

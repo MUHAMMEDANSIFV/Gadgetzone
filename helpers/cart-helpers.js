@@ -20,11 +20,12 @@ const users = mongoose.model(usermodel.USER_COLLECTION, usermodel.USER_SCHEMA)
 
 module.exports = {
   addtocart: async (user, productid) => {
-    const productdetails = await productmodal.findById(productid)
-    console.log(productdetails);
+    const productdetails = await productmodal.findById(productid).populate('Catagery')
+    console.log(productdetails.Catagery);
     var product = {
       items: ObjectID(productid),
       quantity: 1,
+      Category:productdetails.Catagery.catagery,
       total: productdetails.Price
     }
     return new Promise((resolve, reject) => {
@@ -69,7 +70,7 @@ module.exports = {
 
     })
   },
-  findcart: (id) => {
+  findcart: async(id) => {
     return new Promise(async (resolve, reject) => {
       // const user1 = await users.findById(id).populate('addresses')
       const cart = await carts.findOne({
@@ -169,6 +170,6 @@ function calculatecarttotal(products) {
   if (products.length == 0) {
     return 0;
   }
-  let sum = products.reduce((total, num) => total.total + num.total)
+  let sum = products.reduce((total, num) =>  total.total + num.total)
   return sum
 }

@@ -1,8 +1,9 @@
 const Razorpay = require('razorpay');
 var instance = new Razorpay({
     key_id: 'rzp_test_g6NbSW53elwvsD',
-    key_secret: 'UtMmNUd0xJxHejwD2BNa3MWH',
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
+const bcrypt = require('bcrypt');
 const db = require('../config/conection')
 const user_collection = require('../models/Users')
 const ordermodal = require('../models/order')
@@ -28,7 +29,9 @@ const Orders = mongoose.model(ordermodal.ORDER_COLLECTION, ordermodal.ORDER_SCHE
 module.exports = {
 
     adduser: (user) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
+            console.log(user.password);
+            user.password =await bcrypt.hash(user.password,10)
             var user1 = new Users(user);
             user1.save().then((data) => {
                 console.log(data);
@@ -43,12 +46,15 @@ module.exports = {
             const user = await Users.findOne({
                 mobile: data.mobile
             })
-            if (user) {
-                if (user.mobile == data.mobile && user.password == data.password) {
-                    resolve(user)
-                } else {
-                    resolve(false)
-                }
+            
+             if (user) {
+                bcrypt.compare(data.password,user.password).then((status)=>{
+                    if (user.mobile == data.mobile && status) {
+                        resolve(user)
+                    } else {
+                        resolve(false)
+                    }
+               })
             } else {
                 resolve(false)
             }
@@ -223,8 +229,9 @@ module.exports = {
         return new Promise((resolve, reject) => {
             Users.findOne({
                 _id: id
-            }).then((user) => {
-                if (user.password == password) {
+            }).then(async(user) => {
+                const status =await bcrypt.compare(password,user.password)
+                if (status) {
                     resolve({
                         status: true
                     })
@@ -238,7 +245,8 @@ module.exports = {
         })
     },
     passwordchanging: (userid, data) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
+            data.newpassword =await bcrypt.hash(data.newpassword,10)
             Users.updateOne({
                 _id: userid
             }, {

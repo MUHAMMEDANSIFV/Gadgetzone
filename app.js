@@ -7,6 +7,7 @@ const db = require('./config/conection')
 const session = require('express-session')
 const fileUpload = require('express-fileupload')
 const hbs = require('express-handlebars')
+const dotenv = require('dotenv').config
 
 const indexRouter = require('./routes/index');
 const signupRouter = require('./routes/signup');

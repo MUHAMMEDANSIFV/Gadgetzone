@@ -320,7 +320,7 @@
 							</div>
 
 							<ul class="product-btns">
-								<li><a href="/home/addtowishlist/{{product._id}}"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+								<li><a  id="add-to-wishlist"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
 							</ul>
 
@@ -839,5 +839,21 @@
 		<script src="/user/js/nouislider.min.js"></script>
 		<script src="/user/js/jquery.zoom.min.js"></script>
 		<script src="/user/js/main.js"></script>
+
+		<script>
+			$('#add-to-wishlist').click(()=>{
+				const productid = "{{product._id}}"
+				$.ajax({
+					url:"/home/addtowishlist/"+productid,
+					method:"GET",
+					success::(response) => {
+                     
+					},
+					error:(err) => {
+						alert(err)
+					}
+				})
+			})
+		</script>
        
 	</body>

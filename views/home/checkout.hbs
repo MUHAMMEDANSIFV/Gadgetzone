@@ -168,29 +168,7 @@
 		</header>
 		<!-- /HEADER -->
 
-		<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
-			</div>
-			<!-- /container -->
-		</nav>
-		<!-- /NAVIGATION -->
+		
 
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
@@ -662,20 +640,54 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 	<script>
 		function deleteaddress(addressid) {
-			let confirmstatus = confirm('Are You Sure You want to delete the address')
+			const swalWithBootstrapButtons = Swal.mixin({
+				customClass: {
+					confirmButton: 'btn btn-success',
+					cancelButton: 'btn btn-danger'
+				},
+				buttonsStyling: false
+			})
 
-			if (confirmstatus) {
-				$.ajax({
-					url: '/home/deleteaddress/' + addressid,
-					method: 'GET',
-					success: (data) => {
-						alert('Address Delete successfully')
-						$('#address-div').load(location.href + '   #address-div')
-					}
-				})
-			}
+			swalWithBootstrapButtons.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to delete this address!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Yes, delete it!',
+				cancelButtonText: 'No, cancel!',
+				reverseButtons: true
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: '/home/deleteaddress/' + addressid,
+						method: 'GET',
+						success: (data) => {
+							swalWithBootstrapButtons.fire(
+								'Deleted!',
+								'Your address has been deleted.',
+								'success'
+							)
+							$('#address-div').load(location.href + '   #address-div')
+						}
+					})
+
+
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					swalWithBootstrapButtons.fire(
+						'Cancelled',
+						'Your imaginary file is safe :)',
+						'error'
+					)
+				}
+			})
+
 		}
 		selectaddress('test')
 		function selectaddress(addressid) {
@@ -864,10 +876,10 @@
 		function coupon(coupon) {
 			const total = parseInt($('#subtotal').text())
 			if (coupon == null) $('#coupon-error').text('This Coupon is Not Valid')
-			else if(coupon == 'exist') $('#coupon-error').text('Your already Use This Coupon')
-			else if(coupon.minvalue > total){
-				 $('#coupon-error').text('purchase Abouv '+coupon.minvalue)
-			}else {
+			else if (coupon == 'exist') $('#coupon-error').text('Your already Use This Coupon')
+			else if (coupon.minvalue > total) {
+				$('#coupon-error').text('purchase Abouv ' + coupon.minvalue)
+			} else {
 				const subtotal = $('#subtotal')
 				const sum = $('#sum')
 				const discountdiv = $('#discount-div')
@@ -884,7 +896,7 @@
 				discount.text('-' + discountamount)
 				$('#tamp').text(coupon._id)
 			}
-			
+
 		}
 	</script>
 </body>

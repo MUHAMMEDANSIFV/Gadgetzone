@@ -73,5 +73,19 @@ router.post("/coupon/add-coupon",varification.adminlogin,Dashbordcontroller.addc
 
 router.post('/delete-coupon',varification.adminlogin,Dashbordcontroller.deletecoupon)
 
+router.get('/pi-chart',varification.adminlogin,Dashbordcontroller.pichart)
+
+router.get('/banners',varification.adminlogin,Dashbordcontroller.viewbanners)
+
+router.get('/add-banners',varification.adminlogin,Dashbordcontroller.addbanners)
+
+router.post('/add-banners',varification.adminlogin,Dashbordcontroller.postaddbanners)
+
+router.get('/delete-banner/:id?',varification.adminlogin,Dashbordcontroller.deletebanner)
+
+router.get('/edit-banner/:id?',varification.adminlogin,Dashbordcontroller.editbanner)
+
+router.post('/edit-banner/:id?',varification.adminlogin,Dashbordcontroller.posteditbanner)
+
 
 module.exports = router;

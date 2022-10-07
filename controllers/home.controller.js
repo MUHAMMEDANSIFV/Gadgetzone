@@ -6,6 +6,7 @@ const wishlistHelper = require('../helpers/wishlist-helpers')
 const addressHelper = require('../helpers/address-helpers')
 const orderHelper = require('../helpers/order-helpers')
 const couponsHelper = require('../helpers/couponhelpers')
+const bannerHelper = require('../helpers/banner-helpers')
 const {
     render
 } = require('../app')
@@ -20,15 +21,16 @@ module.exports = {
            const product =await productHelper.viewproduct()
               const done =await cartHelper.findcart(req.session.userlogin)
                     const catagery = await catageryHelper.viewcatagery()
+                    const banners =await bannerHelper.viewbanners()
                     console.log(product)
                     const data = done.cart
                     const cartCount = done.count
-                    console.log(catagery);
                     res.render('home/home', {
                         product,
                         data,
                         cartCount,
-                        catagery
+                        catagery,
+                        banners
                     })
         }catch(err) {
             console.log(err);

@@ -79,8 +79,7 @@
                         </div>
                     </div>
                     <a href="/Dashbord/users" class="nav-item nav-link "><i class="fa-solid fa-user"></i> Users</a>
-                    <a href="/Dashbord/users" class="nav-item nav-link "><i
-                            class="fa-solid fa-user"></i>Orders</a>
+                    <a href="/Dashbord/users" class="nav-item nav-link "><i class="fa-solid fa-user"></i>Orders</a>
                     <a href="/Dashbord/coupons" class="nav-item nav-link"><i class="fa-solid fa-user"></i>Coupons</a>
                 </div>
             </nav>
@@ -228,8 +227,7 @@
                                         <a href="/Dashbord/editproduct/{{this._id}}" class="btn btn-info"><i
                                                 class="fa-solid fa-pen "></i></a>
                                         <a href="/Dashbord/deleteproduct/{{this._id}}" class="btn btn-danger"
-                                            style="color: black;"
-                                            onclick="return confirm('Are You Sure ? \nYou Want To Delete The Product')"><i
+                                            style="color: black;" onclick="h()"><i
                                                 class="fa-solid fa-trash-can"></i></a>
                                     </td>
                                 </tr>
@@ -278,5 +276,41 @@
         $(document).ready(function () {
             $('#viewproduct').DataTable();
         });
+        function h() {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    )
+                }
+            })
+        }
     </script>
 </body>

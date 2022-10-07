@@ -1,6 +1,4 @@
 const userHelper = require('../helpers/user-helper')
-const dotenv = require('dotenv')
-dotenv.config()
 const verificationotp = require('../varification/user.verifycation')
 const varification = require('../varification/varification')
 

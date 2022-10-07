@@ -4,7 +4,8 @@ const catagertHelper = require("../helpers/catagery-helpers");
 const productHelper = require("../helpers/product-helper");
 const orderHelpers = require("../helpers/order-helpers");
 const addressHelper = require("../helpers/address-helpers");
-const couponHelper = require("../helpers/couponhelpers")
+const couponHelper = require("../helpers/couponhelpers");
+const bannersHelper =require('../helpers/banner-helpers');
 const {
   resolve
 } = require("path");
@@ -15,11 +16,31 @@ const {
 module.exports = {
   Dashbord: async (req, res, next) => {
     try{
-      res.render("admin/Dashbord");
+      const salesreport =await orderHelpers.salescalculation()
+      const todaysales =await orderHelpers.todaysales()
+      const totalsales =await orderHelpers.totalsales()
+      res.render("admin/Dashbord",{salesreport,todaysales,totalsales});
     } catch(err) {
       console.log(err);
       next()
     }
+  },
+  pichart:async(req,res,next)=>{
+ 
+    try{
+      const salescountcatagery =await orderHelpers.salescountcatagery()
+      const salescategorylabel = salescountcatagery.map(element => {
+        return element._id
+      })
+      const salescategorydata = salescountcatagery.map(element => {
+        return element.count
+      })
+      res.json({selescategorylabel:salescategorylabel,salescategorydata:salescategorydata})
+    }catch(err){
+      console.log(err);
+      next()
+    }
+    
   },
   addlproduct: async (req, res, next) => {
     try {
@@ -112,7 +133,7 @@ module.exports = {
     try {
       const id = await productHelper.deleteproduct(req.params.id)
       var folderpath = "./public/images/productimages/" + id;
-      fs.rmdir(
+      fs.unlink(
         folderpath, {
           recursive: true,
         },
@@ -128,8 +149,7 @@ module.exports = {
   },
   users: async (req, res, next) => {
     try {
-      await userHelper.allusres()
-      console.log(users);
+      const users =await userHelper.allusres()
       res.render('admin/User/users', {
         users
       })
@@ -202,13 +222,12 @@ module.exports = {
   },
   postaddcatagery: async (req, res, next) => {
     try {
-      const done = await catagertHelper.addcatagery(req.body)
+      console.log(req.body.category);
+      const done = await catagertHelper.addcatagery(req.body.category)
       if (done) {
-        //req.session.existcatagery = false
-        res.redirect('back')
+        res.json(done)
       } else {
-        req.session.existcatagery = true
-        res.redirect('/Dashbord/addcatagery')
+        res.json(false)
       }
     } catch (err) {
       console.log(err);
@@ -328,8 +347,67 @@ module.exports = {
   deletecoupon: async (req, res, next) => {
     try {
       const done = await couponHelper.deletecoupon(req.body.couponid)
+      console.log('a');
       res.json(done)
     } catch (err) {
+      console.log(err);
+      next()
+    }
+  },
+  viewbanners:async(req,res,next)=>{
+    try{
+    const banners =await bannersHelper.viewbanners()
+    res.render('admin/banner',{banners})
+    } catch(err) {
+      console.log(err);
+      next()
+    }
+  },
+  addbanners:(req,res,next)=>{
+    try{
+    res.render('admin/addbanner')
+    }catch(err) {
+      console.log(err);
+      next()
+    }
+  },
+  postaddbanners:async(req,res,next) => {
+    try{
+    const done =await bannersHelper.addbanner(req.body)
+    res.redirect('back')
+    let image = req.files.images
+    image.mv('./public/images/banners/'+done._id+'.jpg');
+    }catch (err) {
+      console.log(err);
+      next()
+    }
+  },
+  deletebanner:(req,res,next) => {
+     bannersHelper.deletebanner(req.params.id).then((done)=>{
+      res.json(done)
+     }).catch((err)=>{
+      console.log(err);
+      res.json(false)
+     })
+  },
+  editbanner:async(req,res,next) => {
+    try{
+      const banner =await bannersHelper.find(req.params.id)
+      res.render('admin/editbanner',{banner})
+    }catch(err) {
+      console.log(err);
+      next()
+    }
+  },
+  posteditbanner:async(req,res,next) => {
+    try{
+       const done =await bannersHelper.editbanner(req.params.id,req.body)
+       res.redirect('/Dashbord/banners')
+       if(req.files.images){
+        const image = req.files.images
+        image.mv('./public/images/banners/'+req.params.id+'.jpg')
+       }
+    }catch(err) {
       console.log(err);
       next()
     }

@@ -15,11 +15,9 @@ module.exports = {
                         ref: 'address'
                 },
                 products: [{
-                        items: {
-                                type: mongoose.Schema.Types.ObjectId,
-                                ref: 'product'
-                        },
+                        items: Object,
                         quantity: Number,
+                        Category:Object,
                         total:Number
                 }],
                 dates:{
@@ -42,6 +40,7 @@ module.exports = {
                 usedcoupon:{
                         type:mongoose.Schema.Types.ObjectId , ref:'coupons'
                 },
-                discountprice:Number
+                discountprice:Number,
+                orderDate:Date
         },{timestamps:true})
 }

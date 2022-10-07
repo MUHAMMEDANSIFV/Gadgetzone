@@ -2,6 +2,7 @@ const {
     ObjectID
 } = require('bson')
 const mongoose = require('mongoose')
+const uc = require('upper-case')
 const {
     routes
 } = require('../app')
@@ -12,23 +13,26 @@ const catagerys = mongoose.model(Catagery.CATAGERY_COLLECTION, Catagery.CATAGERY
 module.exports = {
 
     addcatagery: (data) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
+           
+           data =await  uc.upperCase(data)
             catagerys.findOne({
-                catagery: data.catagery
+                catagery: data
             }).then((exist) => {
                 if (exist) resolve(false)
                 else {
-                    console.log(Date)
                     const catagery = new catagerys({
-                        catagery: data.catagery
+                        catagery: data
                     })
                     catagery.save().then((done) => {
                         resolve(done)
                     }).catch((err) => {
+                        console.log(err)
                         reject()
                     })
                 }
             }).catch((err) => {
+                console.log(err);
                 reject()
             })
         })
@@ -64,8 +68,6 @@ module.exports = {
     },
     editcatagery: (id, data) => {
         return new Promise((resolve, reject) => {
-            console.log("id" + id + ':data' + data);
-            const currentdate = Date
             catagerys.updateOne({
                 _id: id
             }, {

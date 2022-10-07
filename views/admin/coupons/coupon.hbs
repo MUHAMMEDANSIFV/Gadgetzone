@@ -197,6 +197,7 @@
                 <div id="coupons" class="bg-secondary rounded h-100 p-4">
                     <h6 class="mb-4">Coupons</h6>
                     <div class="table-responsive">
+                        <div id="table">
                         <table class="table" id="productview">
                             <thead>
                                 <tr>
@@ -236,6 +237,7 @@
                                 {{/each}}
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -273,7 +275,10 @@
             $('#coupons').css('display','none')
            } 
         });
-        function deletecoupon(couponid){
+    </script>
+    <script>
+         function deletecoupon(couponid){
+            console.log('hi')
             $.ajax({
                 url:'/Dashbord/delete-coupon',
                 method:'POST',
@@ -281,14 +286,13 @@
                     couponid:couponid
                 },
                 success:(response) => {
-                  $('#tbody').load(location.href + ' #tbody')
+                  $('#table').load(location.href + " #table")
                 },
                 error:(err) => {
                     alert(err)
                 }
             })
         }
-
     </script>
 
 </body>
