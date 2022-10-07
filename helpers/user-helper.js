@@ -18,10 +18,10 @@ const {
 const crypto = require('crypto');
 const {
     resolve
-} = require('node:path');
+} = require('path');
 const {
     error
-} = require('node:console');
+} = require('console');
 
 const Users = mongoose.model(user_collection.USER_COLLECTION, user_collection.USER_SCHEMA)
 const Orders = mongoose.model(ordermodal.ORDER_COLLECTION, ordermodal.ORDER_SCHEMA)
