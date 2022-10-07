@@ -15,7 +15,7 @@ const {
 const {
     ObjectID
 } = require('bson')
-const crypto = require('node:crypto');
+const crypto = require('crypto');
 const {
     resolve
 } = require('node:path');
