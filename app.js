@@ -13,9 +13,6 @@ const indexRouter = require('./routes/index');
 const signupRouter = require('./routes/signup');
 const homeRouter = require('./routes/home');
 const DashbordRouter = require('./routes/Dashbord');
-const {
-  default: mongoose
-} = require('mongoose');
 const helpers = require('handlebars-helpers');
 
 var app = express();

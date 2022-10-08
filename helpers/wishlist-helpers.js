@@ -26,5 +26,16 @@ module.exports = {
             deletewishlist.remove({})
             resolve(true)
         })
+    },
+    wishlistcount:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+             wishlist.findOne({userid:id}).count().then((count)=>{
+                resolve(count)
+             }).catch((err)=>{
+                console.log(err);
+                reject(err)
+             })
+
+        })
     }
 }

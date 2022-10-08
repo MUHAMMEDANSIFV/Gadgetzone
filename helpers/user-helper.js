@@ -1,7 +1,8 @@
+const dontenv = require('dotenv').config
 const Razorpay = require('razorpay');
 var instance = new Razorpay({
     key_id: 'rzp_test_g6NbSW53elwvsD',
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
+    key_secret: process.env.RAZORPAY_KEY_SECRE,
 });
 const bcrypt = require('bcrypt');
 const db = require('../config/conection')
@@ -15,13 +16,13 @@ const {
 const {
     ObjectID
 } = require('bson')
-const crypto = require('node:crypto');
+const crypto = require('crypto');
 const {
     resolve
-} = require('node:path');
+} = require('path');
 const {
     error
-} = require('node:console');
+} = require('console');
 
 const Users = mongoose.model(user_collection.USER_COLLECTION, user_collection.USER_SCHEMA)
 const Orders = mongoose.model(ordermodal.ORDER_COLLECTION, ordermodal.ORDER_SCHEMA)
@@ -176,7 +177,7 @@ module.exports = {
     creatrazorpay: (orderid, total) => {
         return new Promise((resolve, reject) => {
             var options = {
-                amount: parseInt(total)*100, // amount in the smallest currency unit
+                amount: parseInt(total), // amount in the smallest currency unit
                 currency: "INR",
                 receipt: '' + orderid
             };

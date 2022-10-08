@@ -22,6 +22,7 @@ module.exports = {
               const done =await cartHelper.findcart(req.session.userlogin)
                     const catagery = await catageryHelper.viewcatagery()
                     const banners =await bannerHelper.viewbanners()
+                    const wishlistcount =await wishlistHelper.wishlistcount(req.session.userlogin)
                     console.log(product)
                     const data = done.cart
                     const cartCount = done.count
@@ -30,7 +31,8 @@ module.exports = {
                         data,
                         cartCount,
                         catagery,
-                        banners
+                        banners,
+                        wishlistcount
                     })
         }catch(err) {
             console.log(err);
@@ -102,7 +104,8 @@ module.exports = {
     },
     wishlist: async(req, res,next) => {
         try{
-            const data =await wishlistHelper.viewwishlist(req.session.userlogin)
+            let data =await wishlistHelper.viewwishlist(req.session.userlogin)
+             data = data.length == 0 ? false:data;
             res.render('home/wishlist', {
                 data
             })
