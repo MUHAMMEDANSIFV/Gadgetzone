@@ -165,11 +165,3 @@ module.exports = {
     })
   }
 }
-
-function calculatecarttotal(products) {
-  if (products.length == 0) {
-    return 0;
-  }
-  let sum = products.reduce((total, num) =>  total.total + num.total)
-  return sum
-}

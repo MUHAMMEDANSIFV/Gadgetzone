@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config()
-var url_link = process.env.URL
+var url_link = process.env.MONGODB_URL
 
 const state = {
     db: null
